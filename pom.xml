@@ -2,7 +2,12 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.hzhimingo</groupId>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.5.5</version>
+    </parent>
+    <groupId>com.hzhimingo.halo</groupId>
     <artifactId>halo-short-link</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>halo-short-link</name>
@@ -18,91 +23,128 @@
     <packaging>pom</packaging>
     <description>halo-short-link</description>
     <properties>
-        <java.version>17</java.version>
-        <spring.boot.version>3.0.2</spring.boot.version>
-        <spring.cloud.version>2022.0.0</spring.cloud.version>
-        <spring.cloud.alibaba.version>2022.0.0.0</spring.cloud.alibaba.version>
-        <mybatisplus.spring.boot3.starter.version>3.5.5</mybatisplus.spring.boot3.starter.version>
-        <lombok.version>1.8.30</lombok.version>
-        <commons.lang3.version>3.14.0</commons.lang3.version>
-        <commons.codec.version>1.16.0</commons.codec.version>
-        <kaptcha.spring.boot.starter.version>1.1.0</kaptcha.spring.boot.starter.version>
-        <aliyun.oss.sdk.version>3.17.4</aliyun.oss.sdk.version>
-        <jwt.version>0.12.5</jwt.version>
-        <redisson.version>3.26.0</redisson.version>
-<!--        <sharding-jdbc.version></sharding-jdbc.version>-->
+        <java.version>11</java.version>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
+        <spring.boot.version>2.5.5</spring.boot.version>
+        <spring.cloud.version>2020.0.4</spring.cloud.version>
+        <alibaba.cloud.version>2021.1</alibaba.cloud.version>
+        <mybatisplus.boot.starter.version>3.4.0</mybatisplus.boot.starter.version>
+        <lombok.version>1.18.16</lombok.version>
+        <commons.lang3.version>3.9</commons.lang3.version>
+        <commons.codec.version>1.15</commons.codec.version>
+        <xxl-job.version>2.3.0</xxl-job.version>
+        <aliyun.oss.version>3.10.2</aliyun.oss.version>
+        <captcha.version>1.1.0</captcha.version>
+        <docker.image.prefix>dcloud</docker.image.prefix>
+        <redission.version>3.10.1</redission.version>
+        <jwt.version>0.7.0</jwt.version>
+        <sharding-jdbc.version>4.1.1</sharding-jdbc.version>
+        <!--跳过单元测试-->
+        <skipTests>true</skipTests>
+        <junit.version>4.12</junit.version>
+        <druid.version>1.1.16</druid.version>
     </properties>
 
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-dependencies</artifactId>
-                <version>${spring.boot.version}</version>
-            </dependency>
-            <dependency>
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-dependencies</artifactId>
                 <version>${spring.cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
             </dependency>
             <dependency>
                 <groupId>com.alibaba.cloud</groupId>
                 <artifactId>spring-cloud-alibaba-dependencies</artifactId>
-                <version>${spring.cloud.alibaba.version}</version>
+                <version>${alibaba.cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
             </dependency>
+            <!--mybatis plus和springboot整合-->
             <dependency>
                 <groupId>com.baomidou</groupId>
-                <artifactId>mybatis-plus-spring-boot3-starter</artifactId>
-                <version>${mybatisplus.spring.boot3.starter.version}</version>
+                <artifactId>mybatis-plus-boot-starter</artifactId>
+                <version>${mybatisplus.boot.starter.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.projectlombok</groupId>
                 <artifactId>lombok</artifactId>
                 <version>${lombok.version}</version>
+                <scope>provided</scope>
             </dependency>
             <dependency>
                 <groupId>org.apache.commons</groupId>
                 <artifactId>commons-lang3</artifactId>
-                <version>${commons.lang3.version}</version>
+                <version>${commons.lang3.version}
+                </version>
             </dependency>
             <dependency>
                 <groupId>commons-codec</groupId>
                 <artifactId>commons-codec</artifactId>
                 <version>${commons.codec.version}</version>
             </dependency>
+            <!--验证码kaptcha依赖包-->
             <dependency>
                 <groupId>com.baomidou</groupId>
                 <artifactId>kaptcha-spring-boot-starter</artifactId>
-                <version>${kaptcha.spring.boot.starter.version}</version>
+                <version>${captcha.version}</version>
             </dependency>
+            <!--阿⾥云oss-->
             <dependency>
                 <groupId>com.aliyun.oss</groupId>
                 <artifactId>aliyun-sdk-oss</artifactId>
-                <version>${aliyun.oss.sdk.version}</version>
+                <version>${aliyun.oss.version}</version>
             </dependency>
+            <!-- JWT相关 -->
             <dependency>
                 <groupId>io.jsonwebtoken</groupId>
                 <artifactId>jjwt</artifactId>
                 <version>${jwt.version}</version>
             </dependency>
+            <!--分布式锁-->
             <dependency>
                 <groupId>org.redisson</groupId>
                 <artifactId>redisson</artifactId>
-                <version>${redisson.version}</version>
+                <version>${redission.version}</version>
             </dependency>
-<!--            <dependency>-->
-<!--                <groupId>org.apache.shardingsphere</groupId>-->
-<!--                <artifactId>sharding-jdbc-spring-boot-starter</artifactId>-->
-<!--                <version>${sharding-jdbc.version}</version>-->
-<!--            </dependency>-->
+            <dependency>
+                <groupId>org.apache.shardingsphere</groupId>
+                <artifactId>sharding-jdbc-spring-boot-starter</artifactId>
+                <version>${sharding-jdbc.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>${junit.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.xuxueli</groupId>
+                <artifactId>xxl-job-core</artifactId>
+                <version>${xxl-job.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
+    <!--module不⽤添加打包版本信息-->
     <build>
         <plugins>
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>2.1</version>
+                <configuration>
+                    <skip>true</skip>
+                </configuration>
+            </plugin>
+            <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <fork>true</fork>
+                    <addResources>true</addResources>
+                </configuration>
             </plugin>
         </plugins>
     </build>
