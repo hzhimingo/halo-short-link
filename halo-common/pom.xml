@@ -18,10 +18,6 @@
     </properties>
 
     <dependencies>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-        </dependency>
         <!--项⽬中添加 spring-boot-starter-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
