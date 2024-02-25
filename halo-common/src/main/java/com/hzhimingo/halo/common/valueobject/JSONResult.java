@@ -4,13 +4,13 @@ import com.hzhimingo.halo.common.enums.BizCode;
 
 public class JSONResult<T> {
 
-    public static final String SUCCESS_CODE = "";
+    public static final String SUCCESS_CODE = "0";
 
-    public static final String SUCCESS_MSG = "";
+    public static final String SUCCESS_MSG = "OK";
 
-    public static final String SYSTEM_ERROR_CODE = "";
+    public static final String SYSTEM_ERROR_CODE = "-1";
 
-    public static final String SYSTEM_ERROR_MSG = "";
+    public static final String SYSTEM_ERROR_MSG = "系统异常，请联系管理员";
 
     /**
      * 业务是否成功
