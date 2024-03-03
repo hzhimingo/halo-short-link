@@ -13,13 +13,13 @@ public class CustomExceptionHandler {
 
     @ExceptionHandler(BizException.class)
     public JSONResult<?> handleBizException(BizException e) {
-        log.info("[业务异常, 错误码: {}, 错误信息: {}", e.getCode(), e.getMsg());
+        log.info("业务异常, 错误码: {}, 错误信息: {}", e.getCode(), e.getMsg());
         return JSONResult.bizFail(e.getCode(), e.getMsg());
     }
 
     @ExceptionHandler(Exception.class)
     public JSONResult<?> handleException(Exception e) {
-        log.error("[]");
+        log.error("系统异常: {}", e.getLocalizedMessage(), e);
         return JSONResult.systemFail();
     }
 
